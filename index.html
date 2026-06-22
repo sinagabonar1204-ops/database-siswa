@@ -1594,10 +1594,6 @@ function launchKonfetti() {
   }
   setTimeout(() => container.innerHTML = '', 5000);
 }
-
-// Initialize
-updateProgress(1);
-}
 window.goToScreen = function(screenNumber) {
   document.querySelectorAll('.screen').forEach(function(screen) {
     screen.style.display = 'none';
@@ -1619,6 +1615,9 @@ window.goToScreen = function(screenNumber) {
     top: 0,
     behavior: 'smooth'
   });
+};
+// Initialize
+updateProgress(1);
 };
 </script>
 </body>
