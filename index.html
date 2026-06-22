@@ -1458,6 +1458,27 @@ function buildReview() {
 // ⬇️ GANTI URL INI dengan URL deployment Google Apps Script Anda
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzAUyxqyg12ps_4tBvVMCF7vlHrk7aDWSGM08pRUonDVTi92w0CYY93Dz9Dqsr1eqnS/exec';
 
+let currentScreen = 1;
+
+function goToScreen(screenNumber) {
+  // Sembunyikan semua screen
+  document.querySelectorAll('.screen').forEach(function(screen) {
+    screen.style.display = 'none';
+    screen.classList.remove('active');
+  });
+
+  // Tampilkan screen tujuan
+  const targetScreen = document.getElementById('screen-' + screenNumber);
+
+  if (targetScreen) {
+    targetScreen.style.display = 'block';
+    targetScreen.classList.add('active');
+    currentScreen = screenNumber;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    console.error('Screen tidak ditemukan: screen-' + screenNumber);
+  }
+}
 async function submitData() {
   const btn = document.getElementById('submitBtn');
   const spinner = document.getElementById('submitSpinner');
