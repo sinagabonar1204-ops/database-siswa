@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Data Induk Siswa Baru</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      font-family: 'Inter', sans-serif;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    input, select, textarea {
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body class="text-white">
+
+  <!-- Progress Bar -->
+  <div id="progress" class="flex justify-center space-x-2 p-4">
+    <div class="w-8 h-2 rounded-full bg-gray-600" id="step1"></div>
+    <div class="w-8 h-2 rounded-full bg-gray-600" id="step2"></div>
+    <div class="w-8 h-2 rounded-full bg-gray-600" id="step3"></div>
+    <div class="w-8 h-2 rounded-full bg-gray-600" id="step4"></div>
+    <div class="w-8 h-2 rounded-full bg-gray-600" id="step5"></div>
+    <div class="w-8 h-2 rounded-full bg-gray-600" id="step6"></div>
+  </div>
+
+  <!-- Container -->
+  <div class="max-w-3xl mx-auto p-6">
+    <div id="form-container" class="glass rounded-2xl shadow-xl p-6"></div>
+  </div>
+
+<script>
+let step = 1;
+let dataSiswa = {};
+
+function renderStep() {
+  document.querySelectorAll('#progress div').forEach((el, i) => {
+    el.className = "w-8 h-2 rounded-full " + (i+1===step ? "bg-emerald-400" : "bg-gray-600");
+  });
+
+  const container = document.getElementById('form-container');
+  container.innerHTML = "";
+
+  if(step===1){
+    container.innerHTML = `
+      <div class="text-center space-y-4">
+        <img src="https://via.placeholder.com/100" class="mx-auto rounded-full"/>
+        <h1 class="text-2xl font-bold">Selamat Datang Siswa Baru!</h1>
+        <p>Silakan lengkapi profil Anda untuk database induk sekolah.</p>
+        <button onclick="step++ ; renderStep()" class="bg-emerald-500 hover:bg-emerald-600 px-6 py-2 rounded-xl">Lengkapi Data Siswa</button>
+      </div>`;
+  }
+
+  else if(step===2){
+    container.innerHTML = `
+      <h2 class="text-xl font-bold mb-4">Data Siswa</h2>
+      <form id="formSiswa" class="space-y-2">
+        <input placeholder="NISN" class="w-full p-2 rounded-xl text-black"/>
+        <input placeholder="Nama Lengkap" class="w-full p-2 rounded-xl text-black"/>
+        <input placeholder="Jenis Kelamin" class="w-full p-2 rounded-xl text-black"/>
+        <input placeholder="Tempat Lahir" class="w-full p-2 rounded-xl text-black"/>
+        <input type="date" placeholder="Tanggal Lahir" class="w-full p-2 rounded-xl text-black"/>
+        <input placeholder="NIK" class="w-full p-2 rounded-xl text-black"/>
+        <input placeholder="Sekolah Asal" class="w-full p-2 rounded-xl text-black"/>
+        <input placeholder="NPSN" class="w-full p-2 rounded-xl text-black"/>
+        <textarea placeholder="Alamat Lengkap" class="w-full p-2 rounded-xl text-black"></textarea>
+        <input placeholder="Kecamatan" class="w-full p-2 rounded-xl text-black"/>
+        <input placeholder="Kabupaten/Kota" class="w-full p-2 rounded-xl text-black"/>
+        <input placeholder="Provinsi" class="w-full p-2 rounded-xl text-black"/>
+        <input placeholder="No. HP Siswa" class="w-full p-2 rounded-xl text-black"/>
+        <input placeholder="Status Yatim/Piatu" class="w-full p-2 rounded-xl text-black"/>
+        <button type="button" onclick="simpanDataSiswa()" class="bg-emerald-500 px-6 py-2 rounded-xl">Selanjutnya: Data Orang Tua</button>
+      </form>`;
+  }
+
+  else if(step===3){
+    container.innerHTML = `
+      <h2 class="text-xl font-bold mb-4">Data Orang Tua & Wali</h2>
+      <p>Form ayah, ibu, wali (disederhanakan untuk contoh)</p>
+      <button onclick="step++ ; renderStep()" class="bg-emerald-500 px-6 py-2 rounded-xl">Selanjutnya: Unggah Berkas</button>`;
+  }
+
+  else if(step===4){
+    container.innerHTML = `
+      <h2 class="text-xl font-bold mb-4">Status Bantuan & Upload Berkas</h2>
+      <select class="w-full p-2 rounded-xl text-black">
+        <option>Tidak</option>
+        <option>Ya</option>
+      </select>
+      <input type="file" class="w-full p-2 rounded-xl text-black"/>
+      <button onclick="step++ ; renderStep()" class="bg-emerald-500 px-6 py-2 rounded-xl">Selanjutnya: Review</button>`;
+  }
+
+  else if(step===5){
+    container.innerHTML = `
+      <h2 class="text-xl font-bold mb-4">Review Data</h2>
+      <p>Ringkasan data akan tampil di sini.</p>
+      <button onclick="submitData()" class="bg-emerald-500 px-6 py-2 rounded-xl">Kirim</button>`;
+  }
+
+  else if(step===6){
+    container.innerHTML = `
+      <div class="text-center space-y-4">
+        <h1 class="text-2xl font-bold">Terima kasih!</h1>
+        <p>Data Anda telah berhasil tersimpan dalam database kami. Selamat bergabung dengan keluarga besar sekolah kami.</p>
+      </div>`;
+  }
+}
+function simpanDataSiswa() {
+  dataSiswa = {
+    nisn: document.querySelector('input[placeholder="NISN"]').value,
+    nama: document.querySelector('input[placeholder="Nama Lengkap"]').value,
+    jk: document.querySelector('input[placeholder="Jenis Kelamin"]').value,
+    tempat_lahir: document.querySelector('input[placeholder="Tempat Lahir"]').value,
+    tanggal_lahir: document.querySelector('input[type="date"]').value,
+    nik: document.querySelector('input[placeholder="NIK"]').value,
+    sekolah_asal: document.querySelector('input[placeholder="Sekolah Asal"]').value,
+    npsn: document.querySelector('input[placeholder="NPSN"]').value,
+    alamat: document.querySelector('textarea[placeholder="Alamat Lengkap"]').value,
+    kecamatan: document.querySelector('input[placeholder="Kecamatan"]').value,
+    kota: document.querySelector('input[placeholder="Kabupaten/Kota"]').value,
+    provinsi: document.querySelector('input[placeholder="Provinsi"]').value,
+    hp: document.querySelector('input[placeholder="No. HP Siswa"]').value,
+    status_yatim: document.querySelector('input[placeholder="Status Yatim/Piatu"]').value
+  };
+
+  step++;
+  renderStep();
+}
+async function submitData() {
+  const payload = dataSiswa;
+
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbzGiMLtZs2WxyOax2NWQ6O-derbWL5W8-UFKN11OtaxmkxTsnNA6jYrwxeXj2sGv1vn/exec", { //
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: { "Content-Type": "text/plain;charset=utf-8" }
+    });
+    const text = await res.text();
+    if(text==="SUCCESS"){
+      step = 6;
+      renderStep();
+    } else {
+      alert("Terjadi kesalahan: " + text);
+    }
+  } catch(err){
+    alert("Gagal mengirim: " + err);
+  }
+}
+
+renderStep();
+</script>
+</body>
+</html>
