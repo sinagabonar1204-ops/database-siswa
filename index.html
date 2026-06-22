@@ -1456,8 +1456,8 @@ function buildReview() {
 // SUBMIT DATA TO GOOGLE APPS SCRIPT
 // ============================================================
 // ⬇️ GANTI URL INI dengan URL deployment Google Apps Script Anda
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzAUyxqyg12ps_4tBvVMCF7vlHrk7aDWSGM08pRUonDVTi92w0CYY93Dz9Dqsr1eqnS/exec';
-}
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzGiMLtZs2WxyOax2NWQ6O-derbWL5W8-UFKN11OtaxmkxTsnNA6jYrwxeXj2sGv1vn/exec';
+
 async function submitData() {
   const btn = document.getElementById('submitBtn');
   const spinner = document.getElementById('submitSpinner');
@@ -1526,7 +1526,7 @@ async function submitData() {
   try {
     const res = await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      headers: {'Content-Type": "text/plain;charset=utf-8',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload),
       mode: 'no-cors' // Google Apps Script needs no-cors
     });
@@ -1573,25 +1573,9 @@ function launchKonfetti() {
   }
   setTimeout(() => container.innerHTML = '', 5000);
 }
-  const targetScreen = document.getElementById('screen-' + screenNumber);
 
-  if (!targetScreen) {
-    console.error('Screen tidak ditemukan:', 'screen-' + screenNumber);
-    alert('Halaman screen-' + screenNumber + ' tidak ditemukan.');
-    return;
-  }
-
-  targetScreen.style.display = 'block';
-  targetScreen.classList.add('active');
-
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-};
 // Initialize
 updateProgress(1);
-};
 </script>
 </body>
 </html>
