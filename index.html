@@ -1597,6 +1597,29 @@ function launchKonfetti() {
 
 // Initialize
 updateProgress(1);
+}
+window.goToScreen = function(screenNumber) {
+  document.querySelectorAll('.screen').forEach(function(screen) {
+    screen.style.display = 'none';
+    screen.classList.remove('active');
+  });
+
+  const targetScreen = document.getElementById('screen-' + screenNumber);
+
+  if (!targetScreen) {
+    console.error('Screen tidak ditemukan:', 'screen-' + screenNumber);
+    alert('Halaman screen-' + screenNumber + ' tidak ditemukan.');
+    return;
+  }
+
+  targetScreen.style.display = 'block';
+  targetScreen.classList.add('active');
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+};
 </script>
 </body>
 </html>
