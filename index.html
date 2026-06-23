@@ -1129,6 +1129,13 @@
           </div>
         </div>
 
+        <div class="checkbox-group" style="background:#f8fafc;border-color:#cbd5e1;align-items:flex-start;">
+          <input type="checkbox" id="persetujuanData" style="margin-top:3px;">
+          <label for="persetujuanData" style="color:#334155;line-height:1.6;">
+            Saya menyatakan bahwa data yang saya isi adalah benar dan bersedia data ini digunakan untuk keperluan administrasi madrasah.
+          </label>
+      </div>
+        
         <div class="btn-row">
           <button class="btn-secondary" onclick="goToScreen(4)">← Kembali Edit</button>
           <button class="btn-success" id="submitBtn" onclick="submitData()">
@@ -1450,9 +1457,14 @@ async function submitData() {
   const spinner = document.getElementById('submitSpinner');
   const btnText = document.getElementById('submitBtnText');
 
+  if (!document.getElementById('persetujuanData').checked) {
+    showAlert('Mohon centang pernyataan persetujuan data sebelum mengirim.');
+    return;
+  }
+
   btn.disabled = true;
   spinner.classList.add('show');
-  btnText.textContent = 'Mengirim data...';
+  btnText.textContent = 'Mengirim data.';
 
   const g = id => document.getElementById(id)?.value || '';
 
@@ -1505,6 +1517,7 @@ async function submitData() {
     fileAkte: formData.files['akte'] ? { name: formData.files['akte'].name, data: formData.files['akte'].data } : null,
     fileKK: formData.files['kk'] ? { name: formData.files['kk'].name, data: formData.files['kk'].data } : null,
     fileKartuBantuan: formData.files['kartu-bantuan'] ? { name: formData.files['kartu-bantuan'].name, data: formData.files['kartu-bantuan'].data } : null,
+    persetujuanData: document.getElementById('persetujuanData').checked ? 'YA' : 'TIDAK',
     timestamp: new Date().toLocaleString('id-ID')
   };
 
