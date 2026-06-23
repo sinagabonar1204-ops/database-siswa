@@ -691,10 +691,6 @@
             <input type="text" class="form-input uppercase" id="sekolahAsal" placeholder="Nama sekolah asal" oninput="autoUpper(this)">
           </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">NPSN Sekolah Asal</label>
-          <input type="text" class="form-input" id="npsn" maxlength="8" placeholder="8 digit angka (opsional)">
-        </div>
 
         <div class="divider-label"><span>🪪 Identitas Diri</span></div>
         <div class="form-group">
@@ -1099,19 +1095,6 @@
           <div class="error-msg" id="err-kk"></div>
         </div>
 
-        <!-- Kartu NISN -->
-        <div class="form-group">
-          <label class="form-label">Kartu / Bukti NISN <span class="required-star">*</span></label>
-          <div class="upload-zone" id="zone-nisn-card">
-            <input type="file" accept="image/*,application/pdf" onchange="handleUpload(this, 'nisn-card', 'preview-nisn-card')">
-            <div class="upload-icon">🎓</div>
-            <div class="upload-title">Klik atau drag bukti NISN</div>
-            <div class="upload-sub">Format: JPG/PNG/PDF · Maks. 2MB</div>
-          </div>
-          <div class="upload-success" id="preview-nisn-card"><span>✅</span><span id="nama-nisn-card"></span></div>
-          <div class="error-msg" id="err-nisn-card"></div>
-        </div>
-
         <div class="btn-row">
           <button class="btn-secondary" onclick="goToScreen(3)">← Kembali</button>
           <button class="btn-primary" onclick="validateAndGoScreen5()">
@@ -1166,15 +1149,15 @@
         </div>
         <h2 style="font-family:'Instrument Serif',serif;font-size:28px;font-style:italic;color:var(--navy);margin-bottom:12px;">Data Berhasil Tersimpan!</h2>
         <p style="font-size:14px;color:#64748b;line-height:1.7;max-width:460px;margin:0 auto 32px;">
-          Terima kasih! Data Anda telah berhasil tersimpan dalam database kami. Selamat bergabung dengan keluarga besar sekolah kami. 🎊
+          Terima kasih! Data Anda telah berhasil tersimpan dalam database kami. Selamat bergabung dengan keluarga besar MAN 3 Kota Banda Aceh. 🎊
         </p>
         <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:16px;padding:20px 24px;margin-bottom:28px;text-align:left;max-width:400px;margin-left:auto;margin-right:auto;">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#166534;margin-bottom:12px;">📋 Langkah Selanjutnya</div>
           <div style="font-size:13px;color:#166534;line-height:1.8;">
-            ✅ Simpan tangkapan layar halaman ini<br>
-            ✅ Pantau pengumuman resmi dari sekolah<br>
-            ✅ Siapkan berkas fisik untuk verifikasi<br>
-            ✅ Hadir pada hari orientasi siswa baru
+            ✅ Pantau pengumuman resmi dari madrasah<br>
+            ✅ Pastikan nomor WhatsApp yang dicantumkan tetap aktif<br>
+            ✅ Ikuti informasi lanjutan dari panitia penerimaan<br>
+            ✅ Hadir pada jadwal orientasi siswa baru
           </div>
         </div>
         <p style="font-size:12px;color:#94a3b8;">Jika ada pertanyaan, hubungi panitia penerimaan di nomor yang tercantum di pengumuman resmi sekolah.</p>
@@ -1372,7 +1355,6 @@ function validateAndGoScreen4() {
 function validateAndGoScreen5() {
   if (!formData.files['akte']) return showAlert('Akta Kelahiran wajib diunggah.');
   if (!formData.files['kk']) return showAlert('Kartu Keluarga (KK) wajib diunggah.');
-  if (!formData.files['nisn-card']) return showAlert('Bukti NISN wajib diunggah.');
   if (document.getElementById('penerimaBantuan').value === 'YA') {
     if (!document.getElementById('nomorKartu').value.trim()) return showAlert('Nomor kartu bantuan wajib diisi.');
     if (!formData.files['kartu-bantuan']) return showAlert('Foto kartu bantuan wajib diunggah.');
@@ -1397,7 +1379,6 @@ function buildReview() {
         ['NIK', g('nik')],
         ['Tempat, Tanggal Lahir', g('tempatLahir') + ', ' + formatTanggalIndo(g('tanggalLahir'))],
         ['Sekolah Asal', g('sekolahAsal')],
-        ['NPSN', g('npsn') || '-'],
         ['Status Yatim/Piatu', g('statusYatim') || 'TIDAK'],
         ['Alamat', g('alamatSiswa')],
         ['Kecamatan', g('kecamatan')],
@@ -1484,7 +1465,6 @@ async function submitData() {
     tempatLahir: g('tempatLahir'),
     tanggalLahir: formatTanggalIndo(g('tanggalLahir')),
     sekolahAsal: g('sekolahAsal'),
-    npsn: g('npsn'),
     statusYatim: g('statusYatim'),
     alamatSiswa: g('alamatSiswa'),
     kecamatan: g('kecamatan'),
@@ -1524,7 +1504,6 @@ async function submitData() {
     // Files (base64)
     fileAkte: formData.files['akte'] ? { name: formData.files['akte'].name, data: formData.files['akte'].data } : null,
     fileKK: formData.files['kk'] ? { name: formData.files['kk'].name, data: formData.files['kk'].data } : null,
-    fileNISN: formData.files['nisn-card'] ? { name: formData.files['nisn-card'].name, data: formData.files['nisn-card'].data } : null,
     fileKartuBantuan: formData.files['kartu-bantuan'] ? { name: formData.files['kartu-bantuan'].name, data: formData.files['kartu-bantuan'].data } : null,
     timestamp: new Date().toLocaleString('id-ID')
   };
