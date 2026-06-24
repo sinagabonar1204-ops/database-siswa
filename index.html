@@ -808,6 +808,14 @@
           <label class="form-label">No. HP Siswa (WhatsApp)</label>
           <input type="text" class="form-input" id="hpSiswa" placeholder="Contoh: 081234567890" oninput="normalizeHP(this)">
         </div>
+        <div class="form-group">
+          <label class="form-label">Bersedia Masuk Kelas Digital <span class="required-star">*</span></label>
+          <select class="form-select" id="kelasDigital">
+          <option value="">-- Pilih --</option>
+          <option value="YA">Iya</option>
+          <option value="TIDAK">Tidak</option>
+          </select>
+        </div>
 
         <div class="btn-row">
           <button class="btn-secondary" onclick="goToScreen(1)">← Kembali</button>
@@ -1425,7 +1433,8 @@ function validateAndGoScreen3() {
   if (!document.getElementById('kecamatan').value.trim()) return showAlert('Kecamatan wajib diisi.');
   if (!document.getElementById('kabupaten').value.trim()) return showAlert('Kabupaten/Kota wajib diisi.');
   if (!document.getElementById('provinsi').value.trim()) return showAlert('Provinsi wajib diisi.');
-  goToScreen(3);
+if (!document.getElementById('kelasDigital').value) return showAlert('Pilihan kelas digital wajib diisi.');
+goToScreen(3);
 }
 
 function validateAndGoScreen4() {
@@ -1467,6 +1476,7 @@ function buildReview() {
         ['Kabupaten/Kota', g('kabupaten')],
         ['Provinsi', g('provinsi')],
         ['No. HP Siswa', g('hpSiswa') || '-'],
+        ['Bersedia Masuk Kelas Digital', g('kelasDigital') || '-'],
       ]
     },
     {
@@ -1559,6 +1569,7 @@ submitStatusText.style.display = 'block';
     kabupaten: g('kabupaten'),
     provinsi: g('provinsi'),
     hpSiswa: g('hpSiswa'),
+    kelasDigital: g('kelasDigital'),
     // Data Ayah
     namaAyah: g('namaAyah'),
     ttlAyah: g('ttlAyahTempat') + (g('ttlAyahTgl') ? ', ' + formatTanggalIndo(g('ttlAyahTgl')) : ''),
