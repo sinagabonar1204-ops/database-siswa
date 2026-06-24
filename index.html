@@ -1057,7 +1057,7 @@
               <input type="file" accept="image/*" onchange="handleUpload(this, 'kartu-bantuan', 'preview-kartu-bantuan')">
               <div class="upload-icon">🪪</div>
               <div class="upload-title">Klik atau drag foto kartu</div>
-              <div class="upload-sub">Format: JPG/PNG · Maks. 2MB</div>
+              <div class="upload-sub">Format: JPG/PNG · Maks. 1MB</div>
             </div>
             <div class="upload-success" id="preview-kartu-bantuan">
               <span>✅</span><span id="nama-kartu-bantuan"></span>
@@ -1082,7 +1082,7 @@
             <input type="file" accept="image/*,application/pdf" onchange="handleUpload(this, 'akte', 'preview-akte')">
             <div class="upload-icon">📜</div>
             <div class="upload-title">Klik atau drag file Akta Kelahiran</div>
-            <div class="upload-sub">Format: JPG/PNG/PDF · Maks. 2MB</div>
+            <div class="upload-sub">Format: JPG/PNG/PDF · Maks. 1MB</div>
           </div>
           <div class="upload-success" id="preview-akte"><span>✅</span><span id="nama-akte"></span></div>
           <div class="error-msg" id="err-akte"></div>
@@ -1095,7 +1095,7 @@
             <input type="file" accept="image/*,application/pdf" onchange="handleUpload(this, 'kk', 'preview-kk')">
             <div class="upload-icon">🏠</div>
             <div class="upload-title">Klik atau drag file Kartu Keluarga</div>
-            <div class="upload-sub">Format: JPG/PNG/PDF · Maks. 2MB</div>
+            <div class="upload-sub">Format: JPG/PNG/PDF · Maks. 1MB</div>
           </div>
           <div class="upload-success" id="preview-kk"><span>✅</span><span id="nama-kk"></span></div>
           <div class="error-msg" id="err-kk"></div>
@@ -1329,9 +1329,9 @@ function handleUpload(input, key, previewId) {
 
   if (!file) return;
 
-  const MAX = 2 * 1024 * 1024; // 2MB
+  const MAX = 2 * 1024 * 1024; // 1MB
   if (file.size > MAX) {
-    errEl.textContent = '⛔ Ukuran file melebihi 2MB. Silakan kompres terlebih dahulu.';
+    errEl.textContent = '⛔ Ukuran file melebihi 1MB. Silakan kompres terlebih dahulu.';
     errEl.classList.add('show');
     successEl.classList.remove('show');
     input.value = '';
