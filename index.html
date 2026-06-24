@@ -595,6 +595,33 @@
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @media (max-width: 600px) {
+  .prepare-box {
+    max-width: calc(100% - 36px) !important;
+    padding: 20px 22px !important;
+    margin: 24px auto !important;
+    border-radius: 18px !important;
+  }
+
+  .prepare-desc {
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+  }
+
+  .prepare-grid {
+    grid-template-columns: 1fr !important;
+    gap: 11px !important;
+    font-size: 14px !important;
+    line-height: 1.55 !important;
+  }
+
+  .prepare-note {
+    font-size: 13px !important;
+    line-height: 1.65 !important;
+    padding: 13px 14px !important;
+  }
+}
+  
 </style>
 </head>
 <body>
@@ -642,16 +669,16 @@
         </div>
         <h1 class="hero-title">Selamat Datang,<br>Siswa Baru MAN 3 Kota Banda Aceh! 🎉</h1>
         <p class="hero-sub">Selamat! Anda telah berhasil lulus seleksi masuk. Silakan lengkapi profil Anda untuk melengkapi database induk madrasah kami.</p> 
-        <div style="background:#f8fafc;border:1.5px solid #dbeafe;border-radius:18px;padding:18px 22px;margin:24px auto;max-width:560px;text-align:left;color:#334155;">
+        <div class="prepare-box" style="background:#f8fafc;border:1.5px solid #dbeafe;border-radius:18px;padding:18px 22px;margin:24px auto;max-width:560px;text-align:left;color:#334155;">
   <div style="font-size:13px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:#174a8b;margin-bottom:14px;">
     📌 Sebelum Mengisi Formulir
   </div>
 
-  <div style="font-size:14px;line-height:1.7;margin-bottom:14px;color:#475569;">
+  <div class="prepare-desc" style="font-size:14px;line-height:1.7;margin-bottom:14px;color:#475569;">
     Mohon siapkan data dan dokumen berikut agar proses pengisian berjalan lancar.
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;font-size:14px;line-height:1.5;color:#1e293b;">
+  <div class="prepare-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;font-size:14px;line-height:1.5;color:#1e293b;">
     <div>✅ Kartu Keluarga</div>
     <div>✅ Akta Kelahiran</div>
     <div>✅ Nomor NISN dan NIK siswa</div>
@@ -660,7 +687,7 @@
     <div>✅ Kartu bantuan jika ada</div>
   </div>
 
-  <div style="margin-top:16px;padding:12px 14px;background:#fff7ed;border:1px solid #fdba74;border-radius:12px;color:#9a3412;font-size:13px;line-height:1.6;">
+  <div class="prepare-note" style="margin-top:16px;padding:12px 14px;background:#fff7ed;border:1px solid #fdba74;border-radius:12px;color:#9a3412;font-size:13px;line-height:1.6;">
     Pastikan dokumen yang diunggah jelas, tidak blur, dan berukuran maksimal <strong>1MB</strong> per file.
   </div>
  </div>     
